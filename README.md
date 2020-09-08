@@ -19,9 +19,9 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <!--<a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>-->
+  <a href="https://github.com/Edgarborras94/Addin">
+    <img src="images/addinlogo.png" alt="Logo" width="80" height="80">
+  </a>
 
   <h3 align="center">Addin.js</h3>
 
@@ -108,7 +108,121 @@ var list = new Addin('addedjs'); //default -> english
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-You can view the [DEMO](https://codepen.io/edgarborras94/pen/KKzZYRM) to see 2 fully working usages
+-Simple usage:
+```
+...
+<div class="addindiv">
+</div>
+...
+<!--Import the script-->
+<script src="/js/adding.min.js">
+<!--Initialize Addin -->
+<script>
+var addin = new Addin('addindiv');
+</script>
+<!--Just it 😁-->
+```
+
+-Some Customization & Spanish:
+```
+...
+<div class="addindiv">
+</div>
+...
+<!--Import the script-->
+<script src="/js/adding.min.js">
+<!--Initialize Addin -->
+<script>
+var list = new Addin('addindiv',
+    {
+        // Values
+        initialValue : 0,
+        
+        // Classes & IDs
+        superParentDivClass: 'addobjectsesp',
+        parentDivClass: 'addedesp', //<-- This will add a number after the classname ie: added0
+        parentDivExtraClasses: 'col-sm-12',
+        fieldName: 'addobjectesp',
+        fieldClass: 'addjsesp',
+        fieldExtraClasses: 'form-control',
+        addButtonClasses: ['btn','btn-success'],
+        removeButtonClasses: ['btn','btn-danger'],
+
+
+        // Strings -> Translatable??
+
+        strings: {
+            buttons: {
+                add: 'Añadir',
+                remove: 'Eliminar',
+            },
+            empty: 'No se ha añadido ningún curso',
+            itemName: 'Curso',
+            itemPlaceholder: 'Nombre del curso'
+        }
+
+        }
+    ); //Demo en español
+</script>
+<!--Just it 😁-->
+```
+-Super Customization (use {loop} variable to differenciate objects os yout custom element):
+```
+...
+<div class="addindiv">
+</div>
+...
+<!--Import the script-->
+<script src="/js/adding.min.js">
+<!--Initialize Addin -->
+<script>
+var list = new Addin('addedjsespcustom',
+    {
+
+        // Values
+        initialValue : 0,
+        object: `<div class="card">
+                        <div class="card-body">
+                        <div class="form-group ">
+                            <label class="form-control-label" for="input-{loop}">{loop}</label>
+                            <input type="text" name="{loop}" id="input-{loop}" class="form-control {loop}" placeholder="{loop}" value="{loop}">
+                        </div>
+                        <div class="form-group ">
+                            <label class="form-control-label" for="input-{loop}2">2{loop}</label>
+                            <input type="text" name="2{loop}" id="input-{loop}2" class="form-control 2{loop}" placeholder="2{loop}" value="2{loop}">
+                        </div>
+                        </div>
+                        </div>`,
+        // Classes & IDs
+        superParentDivClass: 'addobjectsespcustom',
+        parentDivClass: 'addedespcustom', //<-- This will add a number after the classname ie: added0
+        parentDivExtraClasses: 'col-sm-12',
+        fieldName: 'addobjectespcustom',
+        fieldClass: 'addjsespcustom',
+        fieldExtraClasses: 'form-control',
+        addButtonClasses: ['btn','btn-success'],
+        removeButtonClasses: ['btn','btn-danger'],
+
+
+        // Strings -> Translatable??
+
+        strings: {
+            buttons: {
+                add: 'Añadir',
+                remove: 'Eliminar',
+            },
+            empty: 'No se ha añadido ningún curso',
+            itemName: 'Curso',
+            itemPlaceholder: 'Nombre del curso'
+        }
+
+        }
+    ); //Demo en español con custom object
+</script>
+<!--Just it 😁-->
+```
+
+You can view the [DEMO](https://codepen.io/edgarborras94/pen/KKzZYRM) to see 3 fully working usages
 
 
 <!-- ROADMAP -->
