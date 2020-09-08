@@ -22,35 +22,36 @@
         initialValue : 0,   // Initial items on webpage 
         defaultValue: '',   // Default value for inputs
         isRequired: true,   // If true, inputs will be required
+        object: null,
 
-		    // Classes & IDs
+		// Classes & IDs
         superSuperParentID: 'addedjs',              //<-- Removed with selector passed by
         superParentDivClass: 'addobjects',
         parentDivClass: 'added', 
         parentDivExtraClasses: 'col-sm-12',
         fieldName: 'addobject',                     //<-- This will add a number after the classname ie: added0
-		    fieldClasses: ['form-control','lol'],
+		fieldClasses: ['form-control','lol'],
         addButtonClasses: ['btn','btn-success'],
         removeButtonClasses: ['btn','btn-danger'],
         emptyClasses : ['mb-3'],
 
-		    // Strings -> Translatable??
+		// Strings -> Translatable??
 
         strings: {
-          buttons: {
-            add: 'Add',
-            remove: 'Remove',
-          },
-          empty: 'No objects added',
-          itemName: 'Item',
-          itemPlaceholder: 'Item name'
-		    }
+			buttons: {
+				add: 'Add',
+				remove: 'Remove',
+			},
+            empty: 'No objects added',
+            itemName: 'Item',
+            itemPlaceholder: 'Item name'
+		}
 
 	};
     var Constructor = function (selector, options) {
         
         var publicAPIs = {};
-		    var settings;
+		var settings;
 
         var superParentDiv;
         var noAdded;
@@ -75,10 +76,32 @@
             {
                 console.error("Missing the actual DOM with id: "+settings.superSuperParentID+" you must create it beforehand.");
                 return false;
+
             }
             else{
                 return true;
             }
+        }
+        /**
+        *   Check if object exists
+        *   @return {Boolean}       true if exists, false if not
+        */
+        var checkObject = function(){
+            if(settings.object !== null){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        /**
+        *   Update object string to change variables to actual values
+        *   @return {String}       return final Object's string
+        */
+        var updateObject = function(){
+            var newObject = settings.object;
+            newObject = newObject.replace(/{loop}/g,adds);
+            return newObject;
         }
         /**
         *   Add Empty text's div
@@ -116,10 +139,15 @@
         var adderHandler = function (event) {
             var pregunta = document.createElement('div');
             pregunta.classList.add('row' ,settings.parentDivClass+(adds));
+            if(checkObject()){
+                pregunta.innerHTML = updateObject();
+            }
+            else{
             pregunta.innerHTML = `<div class="form-group col-sm-12">
                     <label class="form-control-label" for="input-`+(settings.fieldName+adds)+`">`+settings.strings.itemName+` `+(adds+1)+`</label>
                     <input type="text" name="`+(settings.fieldName + adds)+`" id="input-`+(settings.fieldName+adds)+`" class="`+(settings.fieldClasses.join(' '))+`" placeholder="`+settings.strings.itemPlaceholder+`" value="`+settings.defaultValue+`"  `+(settings.isRequired ? 'required' : '')+`>
                 </div>`;
+            }
             adds++;
             if(!noAdded.classList.contains('d-none')){
                 noAdded.classList.add('d-none');
