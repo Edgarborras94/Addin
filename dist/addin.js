@@ -131,6 +131,9 @@
             removeButton.setAttribute('type', 'button')
             removeButton.innerHTML = settings.strings.buttons.remove;
             removeButton.addEventListener('click',removerHandler,false);
+	    if(settings.initialValue == 0){
+                removeButton.disabled = true;
+            }
             document.getElementById(settings.superSuperParentID).appendChild(removeButton);
         }
         /**
